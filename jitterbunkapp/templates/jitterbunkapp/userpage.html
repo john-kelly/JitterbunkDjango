@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+
+    <head>
+        <title>User Page</title>
+        <link href="{% static 'jitterbunkapp/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
+    </head>
+
+    <body>
+    	<div class="jumbotron">
+            <h2>{{user.username}}</h2>
+        </div>
+        <nav class="navbar navbar-default">
+            <ol class="breadcrumb">
+                <li><a href= {% url 'index' %} >Main feed</a></li>
+                <li class="active">{{user.username}}</li>
+            </ol>
+        </nav>
+
+        <div align = 'center'>
+            <a href= {% url 'add_bunk' user.id %} >Add a Bunk</a>
+        </div>
+
+        <br>
+
+        {% for bunk in bunk_list %}
+        <div align = 'center'>
+            <a href= {% url 'userpage' bunk.from_user.id %} >{{bunk.from_user}}</a>
+            Bunked
+            <a href= {% url 'userpage' bunk.to_user.id %} >{{bunk.to_user}}</a>
+            at {{bunk.time}}
+        </div>
+        {% endfor %}
+    </body>
+
+</html>
