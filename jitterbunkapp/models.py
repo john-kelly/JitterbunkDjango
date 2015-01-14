@@ -11,7 +11,7 @@ class Bunk(models.Model):
     to_user = models.ForeignKey('User', related_name='bunks_to_user')
 
     #default doc: https://docs.djangoproject.com/en/1.7/ref/models/fields/#default
-    time = models.DateTimeField(default=datetime.now)
+    time = models.DateTimeField(editable=False, auto_now_add=True, default=datetime.now)
 
     def __unicode__(self):
         return str(self.id) + ": " + (self.from_user.username +

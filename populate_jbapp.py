@@ -8,15 +8,15 @@ def populate():
     user4 = add_user("Jackie")
 
     #user bunking self? should this be allowed?
-    add_bunk(user0,user0)
+    add_bunk(user0, user4)
     #John->Kyle
-    add_bunk(user0,user1)
+    add_bunk(user0, user1)
     #Kyle->John
-    add_bunk(user1,user0)
+    add_bunk(user1, user0)
     #Jackie->Laura
-    add_bunk(user4,user3)
+    add_bunk(user4, user3)
     #Vanessa->Laura
-    add_bunk(user2,user3)
+    add_bunk(user2, user3)
 
     # Print out what we have added to the user.
     for b in Bunk.objects.all():

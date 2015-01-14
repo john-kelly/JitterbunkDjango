@@ -19,7 +19,13 @@
         </nav>
 
         <div align = 'center'>
-            <a href= {% url 'add_bunk' user.id %} >Add a Bunk</a>
+            <form id="bunk_form" method="post" action="">
+
+                {% csrf_token %}
+                {{ form }}
+
+                <input type="submit" name="submit" value="Create Bunk" />
+            </form>
         </div>
 
         <br>

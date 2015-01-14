@@ -13,7 +13,7 @@ class Migration(SchemaMigration):
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('from_user', self.gf('django.db.models.fields.related.ForeignKey')(related_name='bunks_from_user', to=orm['jitterbunkapp.User'])),
             ('to_user', self.gf('django.db.models.fields.related.ForeignKey')(related_name='bunks_to_user', to=orm['jitterbunkapp.User'])),
-            ('time', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime.now)),
+            ('time', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime.now, auto_now_add=True, blank=True)),
         ))
         db.send_create_signal(u'jitterbunkapp', ['Bunk'])
 
@@ -38,7 +38,7 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'Bunk'},
             'from_user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'bunks_from_user'", 'to': u"orm['jitterbunkapp.User']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'time': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
+            'time': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now', 'auto_now_add': 'True', 'blank': 'True'}),
             'to_user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'bunks_to_user'", 'to': u"orm['jitterbunkapp.User']"})
         },
         u'jitterbunkapp.user': {
