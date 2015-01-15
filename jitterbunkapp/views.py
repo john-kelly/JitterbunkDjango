@@ -1,5 +1,4 @@
-from django.template import RequestContext
-from django.shortcuts import render_to_response, get_object_or_404
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 
 from jitterbunkapp.models import Bunk, User
@@ -8,11 +7,6 @@ from datetime import datetime
 
 
 def index(request):
-    # Request the context of the request.
-    # The context contains information such as the client's machine details,
-    # for example.
-    context = RequestContext(request)
-
     bunk_list = Bunk.objects.all().order_by('id')
 
     # Construct a dictionary to pass to the template engine as its context.
@@ -20,16 +14,11 @@ def index(request):
 
     # Return a rendered response to send to the client.
     # We make use of the shortcut function to make our lives easier.
-    return render_to_response('jitterbunkapp/index.html',
-                              context_dict, context)
+    return render(request, 'jitterbunkapp/index.html',
+                  context_dict)
 
 
 def userpage(request, user_id):
-    # Request the context of the request.
-    # The context contains information such as the client's machine details,
-    # for example.
-    context = RequestContext(request)
-
     # Get user data from db
     user = get_object_or_404(User, id=user_id)
 
@@ -38,11 +27,6 @@ def userpage(request, user_id):
         form = BunkForm(request.POST)
         # check if form is valid
         if form.is_valid():
-
-            # PROBLEM:
-            # Will not let me add to the form here
-            # form.time = datetime.now() does not work
-
             # save the new bunk
             form.save(commit=True)
             # call the userpage view
@@ -66,5 +50,5 @@ def userpage(request, user_id):
                     'form': form}
 
     # Return a rendered response to send to the client.
-    return render_to_response('jitterbunkapp/userpage.html',
-                              context_dict, context)
+    return render(request, 'jitterbunkapp/userpage.html',
+                  context_dict)
